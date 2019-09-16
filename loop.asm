@@ -3,8 +3,10 @@
 # $8 for loopC
 # $9 for n
 # $10 for addr
+# $11 for x
 
-# $23 as temp
+# $23 as temp 1
+# $22 as temp 2
 
 addi $8, $0, 100
 addi $9, $0, 1
@@ -17,6 +19,17 @@ loop_100:
 andi $23, $9, 3
 beq $23, $0, related_4
 
+# check 2: n has 4 as digit in dec
+add $11, $0, $9
+
+loop_dec_digit:
+addi $23, $0, 10
+divu $11, $23
+mfhi $23 
+addi $22, $0, 4
+beq $22, $23, related_4
+mflo $11
+bne $11, $0, loop_dec_digit
 
 
 # UNrelated to 4: does this
